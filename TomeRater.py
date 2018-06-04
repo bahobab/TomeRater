@@ -16,11 +16,28 @@ class User(object):
     def __eq__(self, other_user):
         return self.email == other_user
 
+    def read_book(self, book, rating = None):
+        self.books[book] = rating
+
+    def get_avarage_rating(self):
+        average = 0
+        n = 0
+        for value in self.books.values():
+            if value != None:
+                n += 1
+                average += value
+        return average / n
+
+# ============= Fiction class =================
+
 class Book(object):
     def __init__(self, title, isbn):
         self.title = title
         self.isbn = isbn
         self.ratings = []
+
+    def	__hash__(self):
+    		return	hash((self.title,	self.isbn))
 
     def get_title(self):
         return self.title
@@ -30,18 +47,24 @@ class Book(object):
 
     def set_isbn(self, isbn):
         self.isbn = isbn
-        print("{name}'ISBN has been updated".format(name = self.name))
+        print("{title}'ISBN has been updated".format(title = self.title))
 
     def add_rating(self, rating):
         if rating in range(5):
             self.ratings.append(rating)
         else:
-            print("Invalid rating {rating}".format(ratitng = self.rating))
+            print("Invalid rating {rating}".format(ratitng = self.ratings))
 
     def __eq__(self, isbn):
         return self.isbn == isbn
 
-    # ============= Fiction class =================
+    def get_avarage_rating(self):
+        average = 0
+        for rating in self.ratings:
+            average += rating
+        return average / len(self.ratings)
+
+# ============= Fiction class =================
 
 class Fiction(Book):
     def __init__(self, title, author, isbn):
@@ -60,7 +83,7 @@ class Non_Fiction(Book):
     def __init__(self, title, isbn, subject, level):
         super().__init__(title, isbn)
         self.subject = subject
-        self.level = level.
+        self.level = level
 
     def get_subject(self):
         return self.subject
