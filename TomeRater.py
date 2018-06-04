@@ -1,7 +1,7 @@
 class User(object):
     def __init__(self, name, email):
         self.name = name
-        self.emai = email
+        self.email = email
         self.books = {}
 
     def get_email(self):
@@ -94,4 +94,41 @@ class Non_Fiction(Book):
     def __repr__(self):
         print("{title}, a {level} manual on {subject}".format(title = self.title, level = self.level, subject = self.subject))
 
-    
+    # ============= No_Fiction class =================
+
+    class TomeRater(object):
+        def __init__(self):
+            self.users = {}
+            self.books = {}
+
+        def create_book(self, title, isbn):
+            new_book = Book(title, isbn)
+            return new_book
+
+        def create_novel(self, title, author, isbn):
+            new_fiction = Fiction(title, author, isbn)
+            return new_fiction
+
+        def create_non_fiction(self, title, subject, level, isbn):
+            new_non_fiction = Non_Fiction(title,isbn,subject,level)
+            return new_non_fiction
+
+        def add_book_to_user(self, book, email, rating = None):
+            try:
+                name = self.users[email]
+                user = User(name, email)
+                user.read_book(book,rating)
+            except KeyError:
+                print("No user with email {email}".format(email=email))
+                return
+
+            if book in self.books:
+                self.books[book] += 1
+            else:
+                self.books[book] = 1
+            
+        def add_user(self, name, email, books = None):
+            self.users[email] = name
+            if books != None:
+                for book in books:
+                    self.add_book_to_user(book, email)
