@@ -189,19 +189,3 @@ class TomeRater(object):
                 highest_rating = user.get_average_rating()
                 most_positive_user = user.name
         return 'The most positive reader is: {reader}'.format(reader = most_positive_user)
-
-# user = User('Polo', 'polo@mail.com')
-# print(user)
-# fiction = Fiction('My Book', 'Moi-meme', '12345')
-# print(fiction)
-# nonfiction = Non_Fiction('Non-Fiction', '2212', 'Non Fiction writind', 'Basic')
-# print(nonfiction)
-
-#tr = TomeRater()
-# tr.add_user('Bineta', 'binebinebine@mai.com')
-# print(tr.users)
-# tr.create_book('How To Sleep Well', '8766-7')
-# tr.add_book_to_user(fiction,'binebinebine@mai.com',3)
-# tr.print_catalog()
-# print(tr.books)
-#print(tr.highest_rated_book())
